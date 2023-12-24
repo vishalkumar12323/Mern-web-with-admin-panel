@@ -2,9 +2,16 @@ import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ComponentContext } from "../App";
 import { Button } from "./Button";
+import { ThemeButton } from "./ThemeButton";
+
 function Navbar() {
-  const { handleShowLoginModal, handleShowSignupModal } =
-    useContext(ComponentContext);
+  const {
+    handleShowLoginModal,
+    handleShowSignupModal,
+    showThemeMenu,
+    handleShowThemeMenu,
+  } = useContext(ComponentContext);
+
   const [isActive, setIsActive] = useState(false);
 
   function handleSideShowMenu() {
@@ -12,6 +19,7 @@ function Navbar() {
       return !previousState;
     });
   }
+
   return (
     <>
       <header className=" h-16 w-full flex justify-between items-center relative shadow-md ">
@@ -20,9 +28,9 @@ function Navbar() {
         </div>
         <nav
           id="menuToggle"
-          className={`z-10 absolute top-[4.1rem] right-0 w-1/2 flex justify-center h-[75vh] transition-all bg-slate-100 ${
+          className={`z-10 absolute top-[4.1rem] right-0 w-1/2 flex justify-center h-[75vh] transition-all ${
             isActive ? "translate-x-0" : "translate-x-full"
-          } lg:top-0 lg:right-6 lg:w-[45%] lg:h-full lg:justify-end lg:items-center lg:translate-x-0 lg:bg-white`}
+          } lg:top-0 lg:right-6 lg:w-[45%] lg:h-full lg:justify-end lg:items-center lg:translate-x-0`}
         >
           <ul
             id="menu"
@@ -37,9 +45,6 @@ function Navbar() {
             <NavLink to="/contact">
               <li>Contact</li>
             </NavLink>
-            <NavLink to="/services">
-              <li>Services</li>
-            </NavLink>
             <Button
               text="Sign up"
               type="button"
@@ -49,6 +54,10 @@ function Navbar() {
               text="Login"
               type="button"
               showPage={handleShowLoginModal}
+            />
+            <ThemeButton
+              toggleThemeMenuDropdown={handleShowThemeMenu}
+              themeMenuState={showThemeMenu}
             />
           </ul>
         </nav>

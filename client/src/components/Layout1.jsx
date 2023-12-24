@@ -9,7 +9,7 @@ const item = [
   },
   {
     id: 2,
-    amount: "1,211",
+    amount: "1,211+",
     name: "$Revenue",
     icon: "./assets/currency-dollar.svg",
     alt: "dollar img",
@@ -23,7 +23,7 @@ const item = [
   },
   {
     id: 4,
-    amount: "1,699",
+    amount: "1,699+",
     name: "Client",
     icon: "./assets/people-fill.svg",
     alt: "people img",

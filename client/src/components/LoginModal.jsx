@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { ComponentContext } from "../App";
 import { Input } from "./Input";
 import { Button } from "./Button";
+import { CloseButton } from "./CloseButton";
 
 function LoginModal() {
-  const { isShowLoginModal, handleCloseModal } = useContext(ComponentContext);
+  const { isShowLoginModal, handleCloseModal, theme } =
+    useContext(ComponentContext);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -31,16 +33,19 @@ function LoginModal() {
   return (
     <>
       <section
-        className={`fixed bg-white shadow-lg z-20 top-[17%] ml-9 ${
+        style={{
+          backgroundColor: `${theme.backgroundColor}`,
+          colro: `${theme.color}`,
+        }}
+        className={`fixed shadow-lg z-20 top-[17%] ml-9 ${
           isShowLoginModal ? "block" : "hidden"
         }  lg:w-1/2 lg:translate-x-1/2 lg:top-[30%] lg:ml-0 md:translate-x-1/2 md:w-1/2 md:ml-0`}
       >
         <div className="py-6 px-4 relative">
-          <img
-            src="./assets/x-circle.svg"
-            alt="delete icon"
-            className="absolute right-4 cursor-pointer"
-            onClick={() => handleCloseModal("login")}
+          <CloseButton
+            buttonStyle="absolute right-4"
+            handleCloseModal={handleCloseModal}
+            modalType="login"
           />
           <form action="#" onSubmit={formSubmit}>
             <Input
@@ -62,7 +67,7 @@ function LoginModal() {
               handleInputChange={handleInputChange}
             />
             <div className="input-box">
-              <Button type="submit" color="black" text="Login" />
+              <Button type="submit" color={theme.color} text="Login" />
             </div>
           </form>
         </div>

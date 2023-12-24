@@ -2,9 +2,10 @@ import { useContext, useState } from "react";
 import { ComponentContext } from "../App";
 import { Input } from "./Input";
 import { Button } from "./Button";
+import { CloseButton } from "./CloseButton";
 
 function RegisterModal() {
-  const { isShowRegisterModal, handleCloseModal } =
+  const { isShowRegisterModal, handleCloseModal, theme } =
     useContext(ComponentContext);
   const userDetails = {
     fName: "",
@@ -34,16 +35,19 @@ function RegisterModal() {
   return (
     <>
       <section
-        className={`bg-[#fff] bottom-24 w-[90%] ml-6 shadow-xl fixed z-20 ${
+        style={{
+          backgroundColor: `${theme.backgroundColor}`,
+          color: `${theme.color}`,
+        }}
+        className={`bottom-20 w-[90%] ml-6 shadow-xl fixed z-20 ${
           isShowRegisterModal ? "block" : "hidden"
         } lg:translate-x-1/2 lg:w-1/2 lg:bottom-5 md:ml-10 md:bottom-20 `}
       >
         <div className="py-4 px-3 relative" id="main-box">
-          <img
-            src="./assets/x-circle.svg"
-            alt="delete icon"
-            className="close-icon absolute right-6 top-5 cursor-pointer"
-            onClick={() => handleCloseModal("signup")}
+          <CloseButton
+            buttonStyle="absolute right-6 top-5"
+            handleCloseModal={handleCloseModal}
+            modalType="signup"
           />
           <form action="#" onSubmit={formSubmit}>
             <Input
@@ -101,7 +105,7 @@ function RegisterModal() {
               value={user.phone}
             />
             <div className="input-box">
-              <Button text="Sign up" type="submit" color="black" />
+              <Button text="Sign up" type="submit" color={theme.color} />
             </div>
           </form>
         </div>
