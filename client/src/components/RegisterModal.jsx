@@ -72,7 +72,7 @@ function RegisterModal() {
               inputType="email"
               placeHolder="Enter Your Email"
               label="Email"
-              idLabel="email"
+              idLabel="emaill"
               name="email"
               handleInputChange={handleInputChange}
               value={user.email}
@@ -81,7 +81,7 @@ function RegisterModal() {
               inputType="password"
               placeHolder="Enter Your Password"
               label="Password"
-              idLabel="password"
+              idLabel="passwordd"
               name="password"
               handleInputChange={handleInputChange}
               value={user.password}

@@ -8,8 +8,9 @@ function Navbar() {
   const {
     handleShowLoginModal,
     handleShowSignupModal,
-    showThemeMenu,
+    showThemeMenuDropdown,
     handleShowThemeMenu,
+    theme,
   } = useContext(ComponentContext);
 
   const [isActive, setIsActive] = useState(false);
@@ -28,6 +29,10 @@ function Navbar() {
         </div>
         <nav
           id="menuToggle"
+          style={{
+            backgroundColor: `${theme.backgroundColor}`,
+            color: `${theme.color}`,
+          }}
           className={`z-10 absolute top-[4.1rem] right-0 w-1/2 flex justify-center h-[75vh] transition-all ${
             isActive ? "translate-x-0" : "translate-x-full"
           } lg:top-0 lg:right-6 lg:w-[45%] lg:h-full lg:justify-end lg:items-center lg:translate-x-0`}
@@ -55,10 +60,12 @@ function Navbar() {
               type="button"
               showPage={handleShowLoginModal}
             />
-            <ThemeButton
-              toggleThemeMenuDropdown={handleShowThemeMenu}
-              themeMenuState={showThemeMenu}
-            />
+            <div className="lg:block hidden">
+              <ThemeButton
+                toggleThemeMenuDropdown={handleShowThemeMenu}
+                themeMenuState={showThemeMenuDropdown}
+              />
+            </div>
           </ul>
         </nav>
         <div
@@ -71,6 +78,12 @@ function Navbar() {
               <div className="menu"></div>
             </div>
           </label>
+        </div>
+        <div className="absolute right-20 top-[1.6rem] block lg:hidden">
+          <ThemeButton
+            toggleThemeMenuDropdown={handleShowThemeMenu}
+            themeMenuState={showThemeMenuDropdown}
+          />
         </div>
       </header>
     </>

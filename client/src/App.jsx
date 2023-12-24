@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Error } from "./pages/Error";
+import { Footer } from "./components/Footer";
 
 const ComponentContext = createContext(null);
 function App() {
@@ -12,7 +13,7 @@ function App() {
     backgroundColor: "#fff",
     color: "#000",
   });
-  const [showThemeMenu, setShowThemeMenu] = useState(false);
+  const [showThemeMenuDropdown, setShowThemeMenuDropdown] = useState(false);
   const [isShowLoginModal, setIsShowLoginModal] = useState(false);
   const [isShowRegisterModal, setIsShowRegisterModal] = useState(false);
 
@@ -20,7 +21,7 @@ function App() {
   const handleShowSignupModal = () => setIsShowRegisterModal(true);
 
   function handleShowThemeMenu() {
-    setShowThemeMenu((previousState) => {
+    setShowThemeMenuDropdown((previousState) => {
       return !previousState;
     });
   }
@@ -48,13 +49,14 @@ function App() {
           backgroundColor: `${theme.backgroundColor}`,
           color: `${theme.color}`,
         }}
+        className="body"
       >
         <ComponentContext.Provider
           value={{
             isShowLoginModal,
             isShowRegisterModal,
             theme,
-            showThemeMenu,
+            showThemeMenuDropdown,
             handleShowLoginModal,
             handleShowSignupModal,
             handleCloseModal,
@@ -70,6 +72,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<Error />} />
             </Routes>
+            <Footer />
           </BrowserRouter>
         </ComponentContext.Provider>
       </div>

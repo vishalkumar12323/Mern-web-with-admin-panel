@@ -13,6 +13,12 @@
         overflow: hidden !important;
     }
 
+    .body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
     .active {
         color: #2188fd;
     }
@@ -64,7 +70,7 @@
     .menu {
         height: 4px;
         width: 40px;
-        background: rgb(0, 0, 0);
+        background: #0044ff;
         transition: 0.3s;
         position: relative;
         transform: translateY(33.3333333333px);
@@ -73,7 +79,7 @@
     .menu:before {
         height: 4px;
         width: 40px;
-        background: rgb(0, 0, 0);
+        background-color: #0044ff;
         transition: 0.3s;
         position: absolute;
         content: "";
@@ -83,7 +89,7 @@
     .menu:after {
         height: 4px;
         width: 40px;
-        background: rgb(0, 0, 0);
+        background-color: #0044ff;
         transition: 0.3s;
         position: absolute;
         content: "";
@@ -110,6 +116,9 @@
         opacity: 0.5;
     }
 
+    .footer {
+        margin-top: auto;
+    }
 }
 
 @tailwind components;

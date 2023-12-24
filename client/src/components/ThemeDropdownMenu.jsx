@@ -12,7 +12,7 @@ function ThemeDropdownMenu({ themeMenuState }) {
         }}
         className={`${
           themeMenuState ? "block" : "hidden"
-        } w-28 h-20 py-3 px-2 absolute right-0 top-8 rounded flex flex-col items-start justify-center gap-1`}
+        } w-28 h-20 py-3 px-2 absolute right-0 top-8 rounded flex flex-col items-start justify-center gap-1 z-10`}
       >
         <li
           className="w-full flex px-2 cursor-pointer justify-center items-center active:border-2 border-blue-500 rounded"
