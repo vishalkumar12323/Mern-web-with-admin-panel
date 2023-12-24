@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@tailwind base;
+
+@layer base {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #root {
+        overflow: hidden !important;
+    }
+
+    .active {
+        color: #4444f8;
+    }
+
+    .hamburger {
+        margin: 0 auto;
+        width: 30px;
+        height: 30px;
+        position: relative;
+    }
+
+    .hamburger .bar {
+        padding: 0;
+        width: 30px;
+        height: 4px;
+        background-color: #000000;
+        display: block;
+        border-radius: 4px;
+        transition: all 0.4s ease-in-out;
+        position: absolute;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    input[type=checkbox]:checked~.container>.menu {
+        background: transparent;
+    }
+
+    input[type=checkbox]:checked~.container>.menu:before {
+        bottom: 0;
+        transform: rotate(45deg);
+    }
+
+    input[type=checkbox]:checked~.container>.menu:after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+
+    .container {
+        width: 100px;
+        height: 70.6666666667px;
+        position: absolute;
+        left: calc(50% - 50px);
+        cursor: pointer;
+    }
+
+    .menu {
+        height: 4px;
+        width: 40px;
+        background: rgb(0, 0, 0);
+        transition: 0.3s;
+        position: relative;
+        transform: translateY(33.3333333333px);
+    }
+
+    .menu:before {
+        height: 4px;
+        width: 40px;
+        background: rgb(0, 0, 0);
+        transition: 0.3s;
+        position: absolute;
+        content: "";
+        bottom: 13px;
+    }
+
+    .menu:after {
+        height: 4px;
+        width: 40px;
+        background: rgb(0, 0, 0);
+        transition: 0.3s;
+        position: absolute;
+        content: "";
+        top: 13px;
+    }
+
+    .slide {
+        opacity: 0;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+
+    .img-slide::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#000000, #000000);
+        opacity: 0.5;
+    }
+
+}
+
+@tailwind components;
+@tailwind utilities;
