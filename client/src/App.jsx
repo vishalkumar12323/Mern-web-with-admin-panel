@@ -6,7 +6,6 @@ import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Error } from "./pages/Error";
 import { Footer } from "./components/Footer";
-
 const ComponentContext = createContext(null);
 function App() {
   const [theme, setTheme] = useState({

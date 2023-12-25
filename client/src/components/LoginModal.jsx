@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { CloseButton } from "./CloseButton";
 
 function LoginModal() {
-  const { isShowLoginModal, handleCloseModal, theme } =
+  const { isShowLoginModal, handleShowSignupModal, handleCloseModal, theme } =
     useContext(ComponentContext);
   const [user, setUser] = useState({
     email: "",
@@ -70,6 +70,21 @@ function LoginModal() {
               <Button type="submit" color={theme.color} text="Login" />
             </div>
           </form>
+          <div
+            className="absolute right-5 bottom-7"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleShowSignupModal();
+              handleCloseModal("login");
+            }}
+          >
+            <p className="text-xs">
+              Not Account Yet.
+              <span className="hover:text-blue-500 hover:underline cursor-pointer">
+                Please Click Here
+              </span>
+            </p>
+          </div>
         </div>
       </section>
     </>

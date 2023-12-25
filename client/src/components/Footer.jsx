@@ -9,9 +9,20 @@ function Footer() {
           backgroundColor: `${theme.backgroundColor}`,
           color: `${theme.color}`,
         }}
-        className="footer py-4 text-center shadow-md border"
+        className="footer py-4 text-center shadow-md border-t"
       >
-        <h1>Copyright &copy; Mern Web {new Date().getFullYear()} </h1>
+        <div className="py-4 ">
+          <ul className="flex gap-3 justify-center items-center mb-2">
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+            <li>FAQs</li>
+          </ul>
+          <hr className="w-2/3 mx-auto py-2" />
+          <p className="text-center text-body-secondary">
+            © {new Date().getFullYear()} Company, Inc
+          </p>
+        </div>
       </footer>
     </>
   );

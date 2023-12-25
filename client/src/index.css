@@ -70,7 +70,7 @@
     .menu {
         height: 4px;
         width: 40px;
-        background: #0044ff;
+        background: #3b92f6;
         transition: 0.3s;
         position: relative;
         transform: translateY(33.3333333333px);
@@ -79,7 +79,7 @@
     .menu:before {
         height: 4px;
         width: 40px;
-        background-color: #0044ff;
+        background-color: #3b92f6;
         transition: 0.3s;
         position: absolute;
         content: "";
@@ -89,7 +89,7 @@
     .menu:after {
         height: 4px;
         width: 40px;
-        background-color: #0044ff;
+        background-color: #3b92f6;
         transition: 0.3s;
         position: absolute;
         content: "";
