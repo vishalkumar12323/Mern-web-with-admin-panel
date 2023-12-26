@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { carouselImg } from "../carouselItem";
 import { Slider } from "./Slider";
 import { CarouselButton } from "./CarouselButton";
@@ -17,14 +17,13 @@ function Carousel() {
     setActiveSlide((previousValue) => (previousValue + 1) % carouselImg.length);
   }
 
-  // useEffect(() => {
-  //   const carouselSlides = setInterval(() => {
-  //     nextSlide();
-  //     console.log("Sliding...");
-  //   }, 4000);
+  useEffect(() => {
+    const carouselSlides = setInterval(() => {
+      nextSlide();
+    }, 4000);
 
-  //   return () => clearInterval(carouselSlides);
-  // });
+    return () => clearInterval(carouselSlides);
+  });
   return (
     <section className="carousel xl:h-[100vh] sm:h-[100vh] h-[50vh]">
       <div className="carousel-container relative h-[100%] w-full">

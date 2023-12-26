@@ -48,7 +48,7 @@ function App() {
           backgroundColor: `${theme.backgroundColor}`,
           color: `${theme.color}`,
         }}
-        className="body"
+        className="body max-w-screen-2xl mx-auto"
       >
         <ComponentContext.Provider
           value={{

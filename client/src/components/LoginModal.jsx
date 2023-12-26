@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
+import axios from "axios";
 import { ComponentContext } from "../App";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { CloseButton } from "./CloseButton";
+import { useAuth } from "../store/auth";
 
 function LoginModal() {
   const { isShowLoginModal, handleShowSignupModal, handleCloseModal, theme } =
@@ -11,6 +13,8 @@ function LoginModal() {
     email: "",
     password: "",
   });
+
+  const { storeToken } = useAuth();
 
   function handleInputChange(event) {
     const name = event.target.name;
@@ -24,11 +28,24 @@ function LoginModal() {
 
   function formSubmit(e) {
     e.preventDefault();
+
+    axios
+      .post("http://localhost:3000/api/auth/login", user, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((res) => {
+        const token = res.data.token;
+        storeToken(token);
+      })
+      .catch((e) => {
+        console.log("error " + e);
+      });
     setUser({
       email: "",
       password: "",
     });
-    console.log(user);
   }
   return (
     <>
@@ -37,9 +54,9 @@ function LoginModal() {
           backgroundColor: `${theme.backgroundColor}`,
           colro: `${theme.color}`,
         }}
-        className={`fixed shadow-lg z-20 top-[17%] ml-9 ${
+        className={`fixed shadow-lg z-20 top-[17%] ${
           isShowLoginModal ? "block" : "hidden"
-        }  lg:w-1/2 lg:translate-x-1/2 lg:top-[30%] lg:ml-0 md:translate-x-1/2 md:w-1/2 md:ml-0`}
+        }  lg:w-1/2 lg:top-[30%] lg:ml-0 md:w-1/2`}
       >
         <div className="py-6 px-4 relative">
           <CloseButton

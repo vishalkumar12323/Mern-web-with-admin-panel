@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import axios from "axios";
 import { ComponentContext } from "../App";
 import { Input } from "./Input";
 import { Button } from "./Button";
@@ -29,8 +30,19 @@ function RegisterModal() {
 
   function formSubmit(e) {
     e.preventDefault();
+    axios
+      .post("http://localhost:3000/api/auth/signup", user, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log("err " + e);
+      });
     setUser(userDetails);
-    console.log(user);
   }
   return (
     <>
@@ -39,9 +51,9 @@ function RegisterModal() {
           backgroundColor: `${theme.backgroundColor}`,
           color: `${theme.color}`,
         }}
-        className={`bottom-20 w-[90%] ml-6 shadow-xl fixed z-20 ${
+        className={`w-[90%] shadow-xl fixed z-20 top-[10%] ${
           isShowRegisterModal ? "block" : "hidden"
-        } lg:translate-x-1/2 lg:w-1/2 lg:bottom-5 md:ml-10 md:bottom-20 `}
+        }  lg:w-1/2 lg:top-[12%]`}
       >
         <div className="py-4 px-3 relative" id="main-box">
           <CloseButton

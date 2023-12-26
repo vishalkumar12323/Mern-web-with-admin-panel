@@ -2,12 +2,22 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import { DB } from "./utils/db.js";
 import { router } from "./routers/router.js";
 import { handleErrors } from "./errors/error.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/auth", router);
 app.use(handleErrors);

@@ -5,7 +5,7 @@ const validate = (schema) => async (req, res, next) => {
     return next();
   } catch (e) {
     // console.log(e.issues[0].message);
-    res.status(422).json({ msg: e.issues[0].message });
+    res.status(400).json({ msg: e.issues[0].message });
   }
 };
 
