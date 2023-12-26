@@ -17,15 +17,15 @@ function Carousel() {
     setActiveSlide((previousValue) => (previousValue + 1) % carouselImg.length);
   }
 
-  useEffect(() => {
-    const carouselSlides = setInterval(() => {
-      nextSlide();
-    }, 4000);
+  // useEffect(() => {
+  //   const carouselSlides = setInterval(() => {
+  //     nextSlide();
+  //   }, 4000);
 
-    return () => clearInterval(carouselSlides);
-  });
+  //   return () => clearInterval(carouselSlides);
+  // });
   return (
-    <section className="carousel xl:h-[100vh] sm:h-[100vh] h-[50vh]">
+    <section className="carousel sm:h-[100vh] h-[50vh]">
       <div className="carousel-container relative h-[100%] w-full">
         <div className="left-arrow z-10 absolute left-0 top-0 flex justify-center items-center h-[50vh] sm:h-[100%]">
           <CarouselButton

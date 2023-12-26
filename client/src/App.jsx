@@ -6,18 +6,16 @@ import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Error } from "./pages/Error";
 import { Footer } from "./components/Footer";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
+import { Logout } from "./pages/Logout";
 const ComponentContext = createContext(null);
 function App() {
+  const [showThemeMenuDropdown, setShowThemeMenuDropdown] = useState(false);
   const [theme, setTheme] = useState({
     backgroundColor: "#fff",
     color: "#000",
   });
-  const [showThemeMenuDropdown, setShowThemeMenuDropdown] = useState(false);
-  const [isShowLoginModal, setIsShowLoginModal] = useState(false);
-  const [isShowRegisterModal, setIsShowRegisterModal] = useState(false);
-
-  const handleShowLoginModal = () => setIsShowLoginModal(true);
-  const handleShowSignupModal = () => setIsShowRegisterModal(true);
 
   function handleShowThemeMenu() {
     setShowThemeMenuDropdown((previousState) => {
@@ -25,13 +23,6 @@ function App() {
     });
   }
 
-  function handleCloseModal(modalType) {
-    if (modalType === "signup") {
-      setIsShowRegisterModal(false);
-    } else if (modalType === "login") {
-      setIsShowLoginModal(false);
-    }
-  }
   const handleThemeChange = (themeType) => {
     if (themeType === "light")
       setTheme({ backgroundColor: "#fff", color: "#000" });
@@ -52,13 +43,8 @@ function App() {
       >
         <ComponentContext.Provider
           value={{
-            isShowLoginModal,
-            isShowRegisterModal,
             theme,
             showThemeMenuDropdown,
-            handleShowLoginModal,
-            handleShowSignupModal,
-            handleCloseModal,
             handleThemeChange,
             handleShowThemeMenu,
           }}
@@ -69,6 +55,9 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/logout" element={<Logout />} />
               <Route path="*" element={<Error />} />
             </Routes>
             <Footer />

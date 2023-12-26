@@ -1,18 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ComponentContext } from "../App";
-import { Button } from "./Button";
 import { ThemeButton } from "./ThemeButton";
+import { useAuth } from "../store/auth";
 
 function Navbar() {
-  const {
-    handleShowLoginModal,
-    handleShowSignupModal,
-    showThemeMenuDropdown,
-    handleShowThemeMenu,
-    theme,
-  } = useContext(ComponentContext);
-
+  const { showThemeMenuDropdown, handleShowThemeMenu, theme } =
+    useContext(ComponentContext);
+  const { isLoggedIn } = useAuth();
   const [isActive, setIsActive] = useState(false);
 
   function handleSideShowMenu() {
@@ -23,7 +18,9 @@ function Navbar() {
 
   return (
     <>
-      <header className=" h-16 w-full flex justify-between items-center relative shadow-md ">
+      <header
+        className={`border-b border-b-${theme.color} h-16 w-full flex justify-between items-center relative shadow-md `}
+      >
         <div className="absolute left-5">
           <h1 className=" text-[1.7rem]">Mern Dev</h1>
         </div>
@@ -50,16 +47,22 @@ function Navbar() {
             <NavLink to="/contact">
               <li>Contact</li>
             </NavLink>
-            <Button
-              text="Sign up"
-              type="button"
-              showPage={handleShowSignupModal}
-            />
-            <Button
-              text="Login"
-              type="button"
-              showPage={handleShowLoginModal}
-            />
+            {isLoggedIn ? (
+              <NavLink to="/logout">
+                <li>Logout</li>
+              </NavLink>
+            ) : (
+              <>
+                <NavLink to="/login">
+                  <li>Login</li>
+                </NavLink>
+
+                <NavLink to="/signup">
+                  <li>Signup</li>
+                </NavLink>
+              </>
+            )}
+
             <div className="lg:block hidden">
               <ThemeButton
                 toggleThemeMenuDropdown={handleShowThemeMenu}
