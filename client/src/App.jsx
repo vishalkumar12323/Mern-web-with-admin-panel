@@ -9,6 +9,7 @@ import { Footer } from "./components/Footer";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { Logout } from "./pages/Logout";
+import { Services } from "./pages/Services";
 const ComponentContext = createContext(null);
 function App() {
   const [showThemeMenuDropdown, setShowThemeMenuDropdown] = useState(false);
@@ -27,7 +28,7 @@ function App() {
     if (themeType === "light")
       setTheme({ backgroundColor: "#fff", color: "#000" });
     else if (themeType === "dark")
-      setTheme({ backgroundColor: "#040b13", color: "#fff" });
+      setTheme({ backgroundColor: "#0b1324", color: "#fff" });
 
     handleShowThemeMenu();
   };
@@ -55,6 +56,7 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/services" element={<Services />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/logout" element={<Logout />} />

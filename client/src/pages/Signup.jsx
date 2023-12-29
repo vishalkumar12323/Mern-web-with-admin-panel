@@ -3,6 +3,7 @@ import axios from "axios";
 import { ComponentContext } from "../App";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
+import { toast } from "react-toastify";
 
 function Signup() {
   const { theme } = useContext(ComponentContext);
@@ -34,12 +35,17 @@ function Signup() {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       })
-      .then((res) => {
-        console.log(res);
+      .then((response) => {
+        toast.success(response.data.message);
       })
       .catch((e) => {
-        console.log("err " + e);
+        toast.error(
+          e.response.data.extraDeatils
+            ? e.response.data.extraDeatils
+            : e.data.message
+        );
       });
+
     setUser(userDetails);
   }
   return (

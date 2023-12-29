@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const authContext = createContext(null);
 function useAuth() {
@@ -12,21 +13,48 @@ function useAuth() {
 
 function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("tokens"));
+  const [fetchedUser, setFetchedUser] = useState();
+  let isLoggedIn = !!token;
   // function to store token in the local storage.
   function storeToken(token) {
+    setToken(token);
     return localStorage.setItem("tokens", token);
   }
 
-  let isLoggedIn = !!token;
-  console.log("token", token);
-  console.log("isLoggedIn", isLoggedIn);
+  
+
+  // function to fetch current user data from database;
+  async function fetchUser() {
+    try {
+      axios
+        .get("http://localhost:3000/api/auth/user", {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((user) => {
+          setFetchedUser(user.data);
+        })
+        .catch((e) => {
+          console.log("fetching user details error", e);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   function LogoutUser() {
     setToken("");
     return localStorage.removeItem("tokens");
   }
   return (
-    <authContext.Provider value={{ storeToken, isLoggedIn, LogoutUser }}>
+    <authContext.Provider
+      value={{ storeToken, isLoggedIn, LogoutUser, fetchedUser }}
+    >
       {children}
     </authContext.Provider>
   );

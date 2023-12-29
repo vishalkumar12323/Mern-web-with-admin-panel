@@ -17,9 +17,14 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+// body data parsing middlewares
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// router middleware.
 app.use("/api/auth", router);
+app.use("/api", router);
+
+// handle erros.
 app.use(handleErrors);
 
 async function startServer() {

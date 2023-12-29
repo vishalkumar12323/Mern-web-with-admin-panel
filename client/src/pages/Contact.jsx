@@ -3,14 +3,26 @@ import axios from "axios";
 import { ComponentContext } from "../App";
 import { useContext, useState } from "react";
 import { Button } from "../components/Button";
+import { useAuth } from "../store/auth";
 
 function Contact() {
   const { theme } = useContext(ComponentContext);
+  const { fetchedUser } = useAuth();
+  const [fetchedUserData, setFetchedUserData] = useState(true);
   const [message, setMessage] = useState({
     username: "",
     email: "",
     message: "",
   });
+
+  if (fetchedUser && fetchedUserData) {
+    setMessage({
+      username: fetchedUser.fName,
+      email: fetchedUser.email,
+      message: "",
+    });
+    setFetchedUserData(false);
+  }
 
   function handleContactForm(event) {
     const { name, value } = event.target;

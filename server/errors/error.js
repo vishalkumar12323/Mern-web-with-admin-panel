@@ -1,9 +1,10 @@
 const handleErrors = (err, req, res, next) => {
   const statusCode = err.statusCode || 422;
-  const message = err.message || "Error from the backend";
+  const message = err.message || "fill the input fields properly";
   const extraDeatils = err.extraDeatils || "Backend Error";
 
-  res.status(statusCode).json({ msg: message, extraDeatils: extraDeatils });
+  console.log(extraDeatils);
+  res.status(statusCode).json({ message, extraDeatils });
 };
 
 export { handleErrors };

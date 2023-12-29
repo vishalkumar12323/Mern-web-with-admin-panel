@@ -15,13 +15,13 @@ async function Signup(req, res) {
     }
     const userCreated = await User.create(user);
     res.status(201).json({
-      msg: "success",
+      message: "Registeration successfully",
       token: await userCreated.generateJWT(),
       userId: userCreated._id.toString(),
     });
   } catch (e) {
-    console.log(e);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.log("error", e);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
@@ -31,22 +31,20 @@ async function Login(req, res) {
     const foundedUser = await User.findOne({ email: user.email });
 
     if (!foundedUser) {
-      return res.status(404).json({ msg: "Invalid credentials" });
+      return res.status(404).json({ message: "Invalid credentials" });
     }
 
     const isPasswordValid = await foundedUser.comparePassword(user.password);
     if (isPasswordValid) {
       res.status(200).json({
-        msg: "Login successful",
+        message: "Login successful",
         token: await foundedUser.generateJWT(),
         userId: foundedUser._id.toString(),
       });
-    } else {
-      res.status(401).json({ msg: "Invalid email or password" });
     }
   } catch (e) {
     console.log("e" + e);
-    res.status(500).json({ msg: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
@@ -59,4 +57,13 @@ async function ContactForm(req, res) {
     return res.status(500).json({ message: "message not delivered" });
   }
 }
-export { Home, Signup, Login, ContactForm };
+
+async function user(req, res) {
+  try {
+    res.status(200).json(req.user);
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
+  }
+}
+
+export { Home, Signup, Login, ContactForm, user };

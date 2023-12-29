@@ -47,6 +47,9 @@ function Navbar() {
             <NavLink to="/contact">
               <li>Contact</li>
             </NavLink>
+            <NavLink to="/services">
+              <li>Services</li>
+            </NavLink>
             {isLoggedIn ? (
               <NavLink to="/logout">
                 <li>Logout</li>

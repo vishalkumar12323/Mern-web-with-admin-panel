@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import {toast} from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ComponentContext } from "../App";
@@ -26,6 +27,7 @@ function Login() {
   }
 
   function formSubmit(e) {
+    
     e.preventDefault();
 
     axios
@@ -35,13 +37,17 @@ function Login() {
         },
       })
       .then((res) => {
-        console.log(res);
+        toast.success(res.data.message);
         const token = res.data.token;
         storeToken(token);
         navigate("/");
       })
       .catch((e) => {
-        console.log("error " + e);
+        toast.error(
+          e.response.data.extraDeatils
+            ? e.response.data.extraDeatils
+            : e.response.data.message
+        );
       });
     setUser({
       email: "",
